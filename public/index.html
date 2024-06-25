@@ -3,8 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 반응형 meta태그 -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <!-- 이미지 -->
+    <link rel="shortcut icon" href="src/assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="src/assets/favicon.ico" type="image/x-icon">
+    <!-- 아이콘 링크 추가 -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
@@ -15,3 +22,12 @@
     <!-- built files will be auto injected -->
   </body>
 </html>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+  html, body {
+    font-family: 'Itim', cursive;
+  }
+  #app {
+    font-family: 'Itim', cursive;
+  }
+</style>

@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = defineConfig({
   //transpileDependencies: true
   configureWebpack: {
+    devtool: 'source-map',
     plugins: [
       new webpack.DefinePlugin({
         // Vue CLI is in maintenance mode, and probably won't merge my PR to fix this in their tooling

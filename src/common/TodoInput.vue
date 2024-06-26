@@ -1,32 +1,33 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" v-model="newTodoItem"  @keyup.enter="addTodo">
-    <span class="addContainer" @click="addTodo">
+    <input type="text" :v-model="newItem"  @keyup.enter="addBtnClick">
+    <span class="addContainer" @click="addBtnClick">
       <i class="far fa-plus-square addBtn"></i>
     </span>
-    <!-- <br/>
-    {{ todoList }} -->
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { /*onMounted,*/ ref, /*defineProps,*/ defineEmits } from "vue";
 
-const todoList = ref([]);
-const newTodoItem = ref("");
+// input인데 props가 필요없을 거 같아
+// const props = defineProps({
+//   newItem :{
+//     type : String,
+//     defalut : ''
+//   }
+// });
+const emits = defineEmits(['add']);
+const newItem = ref('');
 
-const addTodo = () => {
-  //console.log(this.newTodoItem);
-  console.log(newTodoItem.value);
-  localStorage.setItem("newTodoItem", newTodoItem.value);
-  todoList.value.push(newTodoItem.value);
-  newTodoItem.value=""; //초기화
+const addBtnClick = (e) => {
+  console.log(e);
+  console.log(newItem.value);
+  emits('add', newItem.value);
 }
-
-onMounted(()=>{
-  todoList.value = [];
-})
 </script>
+
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -44,4 +45,30 @@ li {
 a {
   color: #42b983;
 }
+
+input:focus {
+  outline: none;
+}
+.inputBox {
+  background: white;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 5px;
+}
+.inputBox input {
+  border-style: none;
+  font-size: 1.2rem;
+}
+.addContainer {
+  float: right;
+  background: linear-gradient(to right, #62EAC6, #32CEE6);
+  display: block;
+  width: 3rem;
+  border-radius: 0 5px 5px 0;
+}
+.addBtn {
+  color: white;
+  vertical-align: middle;
+}
+
 </style>

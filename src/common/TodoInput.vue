@@ -1,6 +1,6 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" :v-model="newItem"  @keyup.enter="addBtnClick">
+    <input type="text" v-model="newItem"  @keyup.enter="addBtnClick">
     <span class="addContainer" @click="addBtnClick">
       <i class="far fa-plus-square addBtn"></i>
     </span>
@@ -20,10 +20,13 @@ import { /*onMounted,*/ ref, /*defineProps,*/ defineEmits } from "vue";
 const emits = defineEmits(['add']);
 const newItem = ref('');
 
-const addBtnClick = (e) => {
-  console.log(e);
-  console.log(newItem.value);
-  emits('add', newItem.value);
+const addBtnClick = () => {
+  if(newItem.value.length == 0){
+    alert("입력된 내용이 없음!!");
+  } else {
+    emits('add', newItem.value);
+    newItem.value=""; //초기화
+  }
 }
 </script>
 

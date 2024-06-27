@@ -1,27 +1,71 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>    
+  <div>
+    <ul>
+      <li v-for="(item,i) in props.todoList" :key="item" >
+        {{ item }}
+        <span class="removeBtn" @click="rmBtnClick(item,i)" >
+          <i class="fas fa-trash-alt"></i>
+        </span>
+      </li>  
+    </ul>    
   </div>
 </template>
 
 <script setup>
-const msg = "List"
+import { defineProps, defineEmits/*, onMounted, ref*/ } from "vue";
+
+const props = defineProps({
+  todoList : {
+    type:Array
+  }
+});
+const emits = defineEmits(['remove']);
+
+const rmBtnClick = (item, i) =>{
+  let obj = {
+    item : item,
+    index : i
+  }
+
+  emits('remove', obj);
+}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
 ul {
   list-style-type: none;
-  padding: 0;
+  padding-left: 0;
+  margin-top: 0;
+  text-align: left;
 }
+
 li {
-  display: inline-block;
-  margin: 0 10px;
+  display: flex;
+  min-height: 50px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0.5rem 0;
+  padding: 0 0.9rem;
+  background: white;
+  border-radius: 5px;
 }
-a {
-  color: #42b983;
+
+.checkBtn {
+  line-height: 45px;
+  color: #62acde;
+  margin-right: 5px;
+}
+.checkBtnCompleted {
+  color: #b3adad;
+}
+.textCompleted {
+  text-decoration: line-through;
+  color: #b3adad;
+}
+.removeBtn {
+  margin-left: auto;
+  color: #de4343;
 }
 </style>

@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput @add="addTodo"/>
-    <TodoList></TodoList>
+    <TodoList :todoList="todoList"/>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -15,23 +15,11 @@ import TodoFooter from '@/common/TodoFooter.vue'
 import { onMounted, ref } from "vue";
 
 const todoList = ref([]);
-const newTodoItem = ref("");
 
-const addTodo = (e) => {
-  console.log(newTodoItem.value);
-  console.log(todoList.value);
-  console.log(e);
-  
-  
-  // if(newTodoItem.value.length == 0){
-  //   alert("입력된 내용이 없음!!");
-  // }
-  // else{
-  //   console.log(newTodoItem.value);
-  //   //localStorage.setItem("newTodoItem", newTodoItem.value);
-  //   todoList.value.push(newTodoItem.value);
-  //   newTodoItem.value=""; //초기화
-  // }
+const addTodo = (param) => {
+  console.log(param);
+  todoList.value.push(param); 
+  //localStorage.setItem("newTodoItem", newTodoItem.value);
 }
 
 onMounted(()=>{

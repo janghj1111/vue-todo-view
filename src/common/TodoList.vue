@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(item,i) in props.todoList" :key="item" >
         {{ item }}
-        <span class="removeBtn" @click="rmBtnClick(item,i)" >
+        <span class="removeBtn" @click="rmBtnClick(i)" >
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>  
@@ -21,13 +21,8 @@ const props = defineProps({
 });
 const emits = defineEmits(['remove']);
 
-const rmBtnClick = (item, i) =>{
-  let obj = {
-    item : item,
-    index : i
-  }
-
-  emits('remove', obj);
+const rmBtnClick = (index) =>{
+  emits('remove', index);
 }
 
 </script>

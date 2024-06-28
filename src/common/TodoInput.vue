@@ -2,35 +2,10 @@
   <div class="inputBox shadow">
     <input type="text" v-model="newItem"  @keyup.enter="addBtnClick">
     <span class="addContainer" @click="addBtnClick">
-      <i class="far fa-plus-square addBtn"></i>
+      <i class="far fa-plus-square addBtn" aria-hidden="true"></i>
     </span>
   </div>
 </template>
-
-<script setup>
-import { /*onMounted,*/ ref, /*defineProps,*/ defineEmits } from "vue";
-
-// input인데 props가 필요없을 거 같아
-// const props = defineProps({
-//   newItem :{
-//     type : String,
-//     defalut : ''
-//   }
-// });
-const emits = defineEmits(['add']);
-const newItem = ref('');
-
-const addBtnClick = () => {
-  if(newItem.value.length == 0){
-    alert("입력된 내용이 없음!!");
-  } else {
-    emits('add', newItem.value);
-    newItem.value=""; //초기화
-  }
-}
-</script>
-
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -54,9 +29,9 @@ input:focus {
 }
 .inputBox {
   background: white;
-  height: 50px;
-  line-height: 50px;
-  border-radius: 5px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 10px;
 }
 .inputBox input {
   border-style: none;
@@ -75,3 +50,18 @@ input:focus {
 }
 
 </style>
+
+<script setup>
+import { /*onMounted,*/ ref, /*defineProps,*/ defineEmits } from "vue";
+const emits = defineEmits(['add']);
+const newItem = ref('');
+
+const addBtnClick = () => {
+  if(newItem.value.length == 0){
+    alert("입력된 내용이 없음!!");
+  } else {
+    emits('add', newItem.value);
+    newItem.value=""; //초기화
+  }
+}
+</script>

@@ -1,5 +1,8 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+  <div>
+    <button type="button" class="btn btn-primary">Primary</button>
+  </div>
   <TodoPage />
 </template>
 

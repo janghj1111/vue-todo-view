@@ -1,18 +1,28 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <div>
+  <!-- vue 부트스트랩 테스트 -->
+  <!-- <div>
     <button type="button" class="btn btn-primary">Primary</button>
-  </div>
-  <TodoPage />
+  </div> -->
+
+  <!-- todo화면 -->
+  <!-- <TodoPage /> -->
+  <PageHeader/> <!-- 헤더 컴포넌트 -->
+    <router-view /> <!-- 페이지 이동이 보여질 곳 -->
+  <PageFooter/> <!-- 푸터 컴포넌트 -->
 </template>
 
 <script>
-import TodoPage from './components/TodoPage.vue'
+//import TodoPage from './components/TodoPage.vue'
+import PageHeader from '@/components/PageHeader.vue'
+import PageFooter from '@/components/PageFooter.vue'
 
 export default {
   name: 'App',
   components: {
-    TodoPage
+    PageHeader,
+    PageFooter
+    //TodoPage
   }
 }
 </script>
@@ -25,6 +35,19 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 
 </style>

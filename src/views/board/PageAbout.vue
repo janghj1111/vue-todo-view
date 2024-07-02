@@ -27,10 +27,10 @@ button {
 </style>
 
 <script setup>
-import TodoHeader from '@/common/TodoHeader.vue'
-import TodoInput from '@/common/TodoInput.vue'
-import TodoList from '@/common/TodoList.vue'
-import TodoFooter from '@/common/TodoFooter.vue'
+import TodoHeader from '@/components/todo/TodoHeader.vue'
+import TodoInput from '@/components/todo/TodoInput.vue'
+import TodoList from '@/components/todo/TodoList.vue'
+import TodoFooter from '@/components/todo/TodoFooter.vue'
 import { onMounted, ref } from "vue";
 
 const todoList = ref([]);

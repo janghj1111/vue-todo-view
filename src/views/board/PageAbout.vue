@@ -1,9 +1,6 @@
 <template>
-  <div id="app">
-    <TodoHeader></TodoHeader>
-    <TodoInput @add="addTodo"/>
-    <TodoList :todoList="todoList" @remove="removeTodo"/>
-    <TodoFooter @clear="clearAllTodo" />
+  <div class="about">
+    <h1>This is an about page</h1>
   </div>
 </template>
 
@@ -27,28 +24,24 @@ button {
 </style>
 
 <script setup>
-import TodoHeader from '@/components/todo/TodoHeader.vue'
-import TodoInput from '@/components/todo/TodoInput.vue'
-import TodoList from '@/components/todo/TodoList.vue'
-import TodoFooter from '@/components/todo/TodoFooter.vue'
 import { onMounted, ref } from "vue";
 
 const todoList = ref([]);
 
-const addTodo = (param) => {
-  console.log(param);
-  todoList.value.push(param); 
-  //localStorage.setItem("newTodoItem", newTodoItem.value);
-}
+// const addTodo = (param) => {
+//   console.log(param);
+//   todoList.value.push(param); 
+//   //localStorage.setItem("newTodoItem", newTodoItem.value);
+// }
 
-const removeTodo = (index) => {
-  console.log(index);
-  todoList.value.splice(index,1);
-}
+// const removeTodo = (index) => {
+//   console.log(index);
+//   todoList.value.splice(index,1);
+// }
 
-const clearAllTodo = () => {
-  console.log('전부삭제');
-}
+// const clearAllTodo = () => {
+//   console.log('전부삭제');
+// }
 
 onMounted(()=>{
   todoList.value = [];

@@ -1,5 +1,4 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <!-- vue 부트스트랩 테스트 -->
   <!-- <div>
     <button type="button" class="btn btn-primary">Primary</button>

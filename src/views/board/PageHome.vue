@@ -1,12 +1,9 @@
 <template>
-  <div id="app">
-    <TodoHeader></TodoHeader>
-    <TodoInput @add="addTodo"/>
-    <TodoList :todoList="todoList" @remove="removeTodo"/>
-    <TodoFooter @clear="clearAllTodo" />
+  <div class="home">
+    "예시 내용 표시"
+    <!-- <HelloWorld msg= /> -->
   </div>
 </template>
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -27,28 +24,25 @@ button {
 </style>
 
 <script setup>
-import TodoHeader from '@/components/todo/TodoHeader.vue'
-import TodoInput from '@/components/todo/TodoInput.vue'
-import TodoList from '@/components/todo/TodoList.vue'
-import TodoFooter from '@/components/todo/TodoFooter.vue'
+//import HelloWorld from '@/components/HelloWorld.vue' // @는 /src를 의미함.
 import { onMounted, ref } from "vue";
 
 const todoList = ref([]);
 
-const addTodo = (param) => {
-  console.log(param);
-  todoList.value.push(param); 
-  //localStorage.setItem("newTodoItem", newTodoItem.value);
-}
+// const addTodo = (param) => {
+//   console.log(param);
+//   todoList.value.push(param); 
+//   //localStorage.setItem("newTodoItem", newTodoItem.value);
+// }
 
-const removeTodo = (index) => {
-  console.log(index);
-  todoList.value.splice(index,1);
-}
+// const removeTodo = (index) => {
+//   console.log(index);
+//   todoList.value.splice(index,1);
+// }
 
-const clearAllTodo = () => {
-  console.log('전부삭제');
-}
+// const clearAllTodo = () => {
+//   console.log('전부삭제');
+// }
 
 onMounted(()=>{
   todoList.value = [];

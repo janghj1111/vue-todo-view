@@ -1,9 +1,4 @@
 <template>
-  <!-- vue 부트스트랩 테스트 -->
-  <!-- <div>
-    <button type="button" class="btn btn-primary">Primary</button>
-  </div> -->
-
   <!-- todo화면 -->
   <!-- <TodoPage /> -->
   <PageHeader/> <!-- 헤더 컴포넌트 -->

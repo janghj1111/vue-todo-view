@@ -13,9 +13,9 @@ const routes = [
         component : () => import('@/views/board/PageAbout.vue'),
     },
     {
-        path : '/board',
-        name : 'Board',
-        component : () => import('@/views/board/PageBoard.vue'),
+        path : '/board/list',
+        name : 'BoardList',
+        component : () => import('@/views/board/BoardList.vue'),
     }
 ]
 

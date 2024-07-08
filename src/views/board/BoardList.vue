@@ -22,6 +22,9 @@
         </tr> 
       </tbody>
     </table>
+    <div>
+      {{ responseData }}
+    </div>
     <!-- <div v-if="paging.total_list_cnt > 0" class="pagination w3-bar w3-padding-16 w3-small" >
       <span class="pg">
       <a href="javascript:;" @click="goPage(1)" class="first w3-button w3-border">&lt;&lt;</a>
@@ -63,8 +66,12 @@ button {
 
 <script setup>
 //import HelloWorld from '@/components/HelloWorld.vue' // @는 /src를 의미함.
-import { onMounted, ref } from "vue";
+import { onMounted, ref, inject } from "vue";
 import { useRouter } from 'vue-router';
+
+const $api = inject('$axios');
+const serverUrl = inject('$serverUrl');
+//import $api from '@/core/request';
 
 const router = useRouter();
 const requestBody = ref({});
@@ -108,17 +115,49 @@ const dummyList = ref([
   }
 ]);
 
+const responseData = ref();
+
 const paginavigation = () => {
       // let pageNumber = [] //;
       //   let start_page = this.paging.start_page;
       //   let end_page = this.paging.end_page;
       //   for (let i = start_page; i <= end_page; i++) pageNumber.push(i);
-      //   return pageNumber;
+      //   return page Number;
 }
 
+const test = async () => {
+  try {
+    const response = await $api.get(`${serverUrl}/board/list`,{ // ${serverUrl}
+      params : {
+        keyword: keyword.value,
+        page: page.value,
+        size: size.value
+      },
+      headers : {}
+    })
+    console.log(response);
+    responseData.value = response;
+  } catch (e) {
+    console.log('Error : ', e)
+  }
+
+  // this.$axios.get(this.$serverUrl + "/board/list", {
+  //       params: this.requestBody,
+  //       headers: {}
+  //     }).then((res) => {      
+
+  //       this.list = res.data  //서버에서 데이터를 목록으로 보내므로 바로 할당하여 사용할 수 있다.
+
+  //     }).catch((err) => {
+  //       if (err.message.indexOf('Network Error') > -1) {
+  //         alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
+  //       }
+  //     })
+}
 
 onMounted(()=>{
   boardList.value = dummyList.value
+  test();
 })
 </script>
 

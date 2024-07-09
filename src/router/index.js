@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import TODO from '@/router/modules/todo/todoRouter.js'
+import BOARD from '@/router/modules/board/boardRouter.js'
 
 const routes = [
     {
@@ -12,11 +14,8 @@ const routes = [
         meta: { authRequired : true },
         component : () => import('@/views/board/PageAbout.vue'),
     },
-    {
-        path : '/board/list',
-        name : 'BoardList',
-        component : () => import('@/views/board/BoardList.vue'),
-    }
+    ...TODO,
+    ...BOARD
 ]
 
 // vue router 공식임. 외우셈.

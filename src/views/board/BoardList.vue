@@ -4,7 +4,7 @@
       <!-- class="btn btn-primary" -->
       <button type="button" class="w3-button w3-round w3-blue-gray" @click="goWrite()">등록</button>
     </div>
-    <table class="w3-table-all">
+    <table v-if="boardList.length != 0" class="w3-table-all">
       <thead>
         <tr>
           <th>No</th>
@@ -18,12 +18,12 @@
           <td>{{item.idx}}</td>
           <td><a @click="goView(item.idx)">{{item.title}}</a></td>
           <td>{{item.writer}}</td>
-          <td>{{item.writeDate}}</td>
+          <td>{{item.writedate}}</td>
         </tr> 
       </tbody>
     </table>
-    <div>
-      {{ responseData }}
+    <div v-else>
+      <h1>No data</h1>
     </div>
     <!-- <div v-if="paging.total_list_cnt > 0" class="pagination w3-bar w3-padding-16 w3-small" >
       <span class="pg">
@@ -68,13 +68,11 @@ button {
 //import HelloWorld from '@/components/HelloWorld.vue' // @는 /src를 의미함.
 import { onMounted, ref, inject } from "vue";
 import { useRouter } from 'vue-router';
+import { goPage } from '@/util/utils.js' // * as util
 
 const $api = inject('$axios');
 const serverUrl = inject('$serverUrl');
-//import $api from '@/core/request';
-
 const router = useRouter();
-const requestBody = ref({});
 const boardList = ref([]); // 리스트 데이터
 const page = ref(router?.query?.page ? router?.query?.page : 1);
 const size = ref(router?.query?.size ? router?.query?.size : 10);
@@ -92,8 +90,6 @@ const paging = ref({
   totalListCnt: 0,
   totalPageCnt: 0,
 })
-const pageNumberArr = ref([]);
-
 const dummyList = ref([
   {
     'idx': 1,
@@ -114,8 +110,8 @@ const dummyList = ref([
     'writeDate' : '작성일시3'
   }
 ]);
+const pageNumberArr = ref([]);
 
-const responseData = ref();
 
 const paginavigation = () => {
       // let pageNumber = [] //;
@@ -125,39 +121,63 @@ const paginavigation = () => {
       //   return page Number;
 }
 
-const test = async () => {
+
+/* 상세보기 */
+const goView = (idx) => {
+  const path = './detail'
+  const params = {
+    idx : idx
+  }
+  goPage(path, params); // 유틸함수로 빼놓음
+}
+
+/* 등록화면 이동 */
+const goWrite = () => {
+  const path = './write';
+  const params = {};
+  goPage(path, params);
+}
+
+/* 페이징 이동 */
+const movePage = ( num ) => {
+  if(page.value !== num ){
+    page.value = num;
+  }
+  getBoardList();
+}
+
+
+/* 리스트 가져오기 */
+const getBoardList = async () => {
   try {
-    const response = await $api.get(`${serverUrl}/board/list`,{ // ${serverUrl}
-      params : {
-        keyword: keyword.value,
-        page: page.value,
-        size: size.value
-      },
-      headers : {}
+    const params = {
+      keyword: keyword.value,
+      page: page.value,
+      size: size.value
+    }
+    await $api.get(`${serverUrl}/board/list`,{ // ${serverUrl}
+      params : params//,headers : {}
+    }).then((res) => {
+      console.log(res);
+      if(res?.data != undefined || res.data.length != 0){
+        boardList.value = res.data;
+      } 
     })
-    console.log(response);
-    responseData.value = response;
   } catch (e) {
     console.log('Error : ', e)
+    if(e.response.status != 500) {
+      console.log('네트워크가 원활하지 않습니다. 잠시 후 다시 시도해주세요.')      
+    }
   }
+}
 
-  // this.$axios.get(this.$serverUrl + "/board/list", {
-  //       params: this.requestBody,
-  //       headers: {}
-  //     }).then((res) => {      
-
-  //       this.list = res.data  //서버에서 데이터를 목록으로 보내므로 바로 할당하여 사용할 수 있다.
-
-  //     }).catch((err) => {
-  //       if (err.message.indexOf('Network Error') > -1) {
-  //         alert('네트워크가 원활하지 않습니다.\n잠시 후 다시 시도해주세요.')
-  //       }
-  //     })
+/* 페이지 진입 */
+const init = () => {
+  getBoardList();
 }
 
 onMounted(()=>{
-  boardList.value = dummyList.value
-  test();
+  init();
 })
 </script>
 

@@ -11,6 +11,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //createApp(App).mount('#app')
 const app = createApp(App); //0702 router 추가
 
+/* axios, serverUrl 설정 */
+
 //app.config.globalProperties.$axios = axios; //전역변수로 설정 컴포넌트에서 this.$axios 호출할 수 있음  // //0705 axios 추가
 app.provide('$axios', axios);
 

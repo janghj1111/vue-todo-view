@@ -1,67 +1,34 @@
 <template>
-  <div class="board-list">
+  <div class="board-detail">
     <div class="common-buttons">
-      <!-- class="btn btn-primary" -->
-      <button type="button" class="w3-button w3-round w3-blue-gray" @click="goWrite()">등록</button>
+      <!-- 추후 로그인 기능이 생기면 작성자와 일치하는지 확인 후 보여줄 것. -->
+      <button type="button" class="w3-button w3-round w3-blue-gray" @click="updateBoard()">수정</button>&nbsp;
+      <button type="button" class="w3-button w3-round w3-red" @click="deleteBoard()">삭제</button>&nbsp;
+      <button type="button" class="w3-button w3-round w3-gray" @click="goBoardList()">목록</button>
     </div>
-    <table v-if="boardList.length != 0" class="w3-table-all">
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>등록일시</th>
-        </tr> 
-      </thead>
-      <tbody>
-        <tr v-for="(item,index) in boardList" :key="index">
-          <td>{{item.idx}}</td>
-          <td><a @click="goView(item.idx)">{{item.title}}</a></td>
-          <td>{{item.writer}}</td>
-          <td>{{item.writedate}}</td>
-        </tr> 
-      </tbody>
-    </table>
-    <div v-else>
-      <h1>No data</h1>
+    <div class="board-contents">
+      <h3>{{ title }}</h3>
+      <div>
+        <strong class="w3-large">{{ writer }}</strong>
+        <br />
+        <span>{{ writedate }}</span>
+      </div>
     </div>
-    <!-- <div v-if="paging.total_list_cnt > 0" class="pagination w3-bar w3-padding-16 w3-small" >
-      <span class="pg">
-      <a href="javascript:;" @click="goPage(1)" class="first w3-button w3-border">&lt;&lt;</a>
-      <a href="javascript:;" v-if="paging.startPage > 10" @click="goPage(`${paging.startPage-1}`)"
-         class="prev w3-button w3-border">&lt;</a>
-      <template v-for=" (n,index) in paginavigation()">
-          <template v-if="paging.page==n">
-              <strong class="w3-button w3-border w3-green" :key="index">{{ n }}</strong>
-          </template>
-          <template v-else>
-              <a class="w3-button w3-border" href="javascript:;" @click="goPage(`${n}`)" :key="index">{{ n }}</a>
-          </template>
-      </template>
-      <a href="javascript:;" v-if="paging.total_page_cnt > paging.end_page"
-         @click="goPage(`${paging.end_page+1}`)" class="next w3-button w3-border">&gt;</a>
-      <a href="javascript:;" @click="goPage(`${paging.total_page_cnt}`)" class="last w3-button w3-border">&gt;&gt;</a>
-      </span>
-    </div> -->
+    <div class="board-contents">
+        <span>{{ contents }}</span>
+    </div>
+    <div class="common-buttons">
+      <!-- 추후 로그인 기능이 생기면 작성자와 일치하는지 확인 후 보여줄 것. -->
+      <button type="button" class="w3-button w3-round w3-blue-gray" @click="updateBoard()">수정</button>&nbsp;
+      <button type="button" class="w3-button w3-round w3-red" @click="deleteBoard()">삭제</button>&nbsp;
+      <button type="button" class="w3-button w3-round w3-gray" @click="goBoardList()">목록</button>
+    </div>
   </div>
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-body {
-  text-align: center;
-  background-color: #F6F6F6;
-}
-input {
-  border-style: groove;
-  width: 200px;
-}
-button {
-  border-style: groove;
-}
-.shadow {
-  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
-}
+
 </style>
 
 <script setup>

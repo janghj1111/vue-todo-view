@@ -1,9 +1,9 @@
 <template>
   <div class="board-list">
-    <div class="common-buttons">
-      <!-- class="btn btn-primary" -->
+    <!-- <div class="common-buttons">
       <button type="button" class="w3-button w3-round w3-blue-gray" @click="goWrite()">등록</button>
-    </div>
+    </div> -->
+    <CommonButton />
     <table v-if="boardList.length != 0" class="w3-table-all">
       <thead>
         <tr>
@@ -46,29 +46,12 @@
   </div>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-body {
-  text-align: center;
-  background-color: #F6F6F6;
-}
-input {
-  border-style: groove;
-  width: 200px;
-}
-button {
-  border-style: groove;
-}
-.shadow {
-  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
-}
-</style>
-
 <script setup>
 //import HelloWorld from '@/components/HelloWorld.vue' // @는 /src를 의미함.
 import { onMounted, ref, inject } from "vue";
 import { useRouter } from 'vue-router';
 import { goPage } from '@/util/utils.js' // * as util
+import CommonButton from '@/components/CommonButton.vue';
 
 const $api = inject('$axios');
 const serverUrl = inject('$serverUrl');

@@ -10,6 +10,11 @@ const boardRouter = [
         name : 'BoardDetail',
         component : () => import('@/views/board/BoardDetail.vue'),
     },
+    {
+        path: '/board/write',
+        name: 'BoardWrite',
+        component : () => import('@/views/board/BoardWrite.vue'),
+    },
 ];
 
 export default boardRouter;

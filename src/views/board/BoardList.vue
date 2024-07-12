@@ -73,6 +73,7 @@ import { goPage } from '@/util/utils.js' // * as util
 const $api = inject('$axios');
 const serverUrl = inject('$serverUrl');
 const router = useRouter();
+const routerquery = router.currentRoute.value.query;
 const boardList = ref([]); // 리스트 데이터
 const page = ref(router?.query?.page ? router?.query?.page : 1);
 const size = ref(router?.query?.size ? router?.query?.size : 10);

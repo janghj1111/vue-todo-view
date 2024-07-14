@@ -8,7 +8,7 @@
         {{ btnInfo.red.btnNm }}
     </button>&nbsp;
     <button v-if="btnInfo.gray.showYn" type="button" class="w3-button w3-round w3-gray" @click="grayBtnClick()">
-        {{ btnInfo.blue.btnNm }}
+        {{ btnInfo.gray.btnNm }}
     </button>
   </div>
 </template>
@@ -38,7 +38,7 @@ import { goPage } from '@/util/utils.js' // * as util
 const props = defineProps({
   btnInfo : {
     type : Object,
-    default : {
+    default : () => ({
       blue : {
         showYn : true,
         btnNm : '등록'
@@ -51,7 +51,7 @@ const props = defineProps({
         showYn : true,
         btnNm : '목록'
       },
-    }
+    })
   }
 });
 const emits = defineEmits(['blue','red','gray']);

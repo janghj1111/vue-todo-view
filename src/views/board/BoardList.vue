@@ -1,9 +1,9 @@
 <template>
   <div class="board-list">
-    <!-- <div class="common-buttons">
+    <div class="common-buttons">
       <button type="button" class="w3-button w3-round w3-blue-gray" @click="goWrite()">등록</button>
-    </div> -->
-    <CommonButton />
+    </div> 
+    <CommonButton  />
     <table v-if="boardList.length != 0" class="w3-table-all">
       <thead>
         <tr>

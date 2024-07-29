@@ -58,7 +58,7 @@ const getBoardDtl = async () => {
     })
   } catch (e) {
     console.log('Error : ', e);
-    if(e.response.status != 500) {
+    if(e?.response?.status != 500) {
       console.log('네트워크가 원활하지 않습니다. 잠시 후 다시 시도해주세요.');      
     }
   }
@@ -91,7 +91,7 @@ const saveBoard = async () => {
     }
   } catch (e){
     console.log('Error : ', e);
-    if(e.response.status != 500) {
+    if(e?.response?.status != 500) {
       console.log('네트워크가 원활하지 않습니다. 잠시 후 다시 시도해주세요.');      
     }
   }

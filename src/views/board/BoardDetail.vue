@@ -1,11 +1,6 @@
 <template>
   <div class="board-detail">
-    <div class="common-buttons">
-      <!-- 추후 로그인 기능이 생기면 작성자와 일치하는지 확인 후 보여줄 것. -->
-      <button type="button" class="w3-button w3-round w3-blue-gray" @click="updateBoard()">수정</button>&nbsp;
-      <button type="button" class="w3-button w3-round w3-red" @click="deleteBoard()">삭제</button>&nbsp;
-      <button type="button" class="w3-button w3-round w3-gray" @click="goBoardList()">목록</button>
-    </div>
+    <CommonButton :btnInfo="btnInfo" @blue="updateBoard()" @red="deleteBoard()" @gray="goBoardList()" />
     <div class="board-contents">
       <h3>{{ resBoardObj.title }}</h3>
       <div>
@@ -36,12 +31,26 @@
 import { onMounted, ref, inject } from "vue";
 import { useRouter } from 'vue-router';
 import { goPage } from '@/util/utils.js' // * as util
+import CommonButton from '@/components/CommonButton.vue';
 
 const $api = inject('$axios');
 const serverUrl = inject('$serverUrl');
 const router = useRouter();
 const routerquery = router.currentRoute.value.query;
-
+const btnInfo = ref({
+  blue : {
+    showYn : true,
+    btnNm : '수정'
+  },
+  red : {
+    showYn : true,
+    btnNm : '삭제'
+  },
+  gray : {
+    showYn : true,
+    btnNm : '목록'
+  }
+})
 const boardList = ref([]); // 리스트 데이터
 const boardIdx = routerquery?.idx ? routerquery?.idx : 1;
 const resBoardObj = ref({}); 

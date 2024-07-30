@@ -1,9 +1,6 @@
 <template>
   <div class="board-list">
-    <div class="common-buttons">
-      <button type="button" class="w3-button w3-round w3-blue-gray" @click="goWrite()">등록</button>
-    </div> 
-    <CommonButton  />
+    <CommonButton :btnInfo="btnInfo" @blue="goWrite()" />
     <table v-if="boardList.length != 0" class="w3-table-all">
       <thead>
         <tr>
@@ -61,6 +58,20 @@ const boardList = ref([]); // 리스트 데이터
 const page = ref(router?.query?.page ? router?.query?.page : 1);
 const size = ref(router?.query?.size ? router?.query?.size : 10);
 const keyword = ref(router?.query?.keyword);
+const btnInfo = ref({
+  blue : {
+    showYn : true,
+    btnNm : '등록'
+  },
+  red : {
+    showYn : false,
+    btnNm : '삭제'
+  },
+  gray : {
+    showYn : false,
+    btnNm : '목록'
+  }
+})
 const paging = ref({
   block: 0,
   endPage: 0,

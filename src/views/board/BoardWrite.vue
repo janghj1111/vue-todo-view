@@ -1,9 +1,10 @@
 <template>
   <div class="board-detail">
-    <div class="common-buttons">
+    <!-- <div class="common-buttons">
       <button type="button" class="w3-button w3-round w3-blue-gray" @click="saveBoard()">저장</button>&nbsp;
       <button type="button" class="w3-button w3-round w3-gray" @click="goBoardList()">목록</button>
-    </div>
+    </div> -->
+    <CommonButton :btnInfo="btnInfo" @blue="saveBoard()" @gray="goBoardList()"/>
     <div class="board-contents">
       <input type="text" v-model="resBoardObj.title" class="w3-input w3-border" placeholder="제목을 입력해주세요.">
       <input v-if="boardIdx === undefined" type="text" v-model="resBoardObj.writer" class="w3-input w3-border" placeholder="작성자를 입력해주세요." >
@@ -12,10 +13,11 @@
       <textarea id="" cols="30" rows="10" v-model="resBoardObj.contents" class="w3-input w3-border" style="resize: none;">
       </textarea>
     </div>
-    <div class="common-buttons">
+    <CommonButton :btnInfo="btnInfo" @blue="saveBoard()" @gray="goBoardList()"/>
+    <!-- <div class="common-buttons">
       <button type="button" class="w3-button w3-round w3-blue-gray" @click="saveBoard()">저장</button>&nbsp;
       <button type="button" class="w3-button w3-round w3-gray" @click="goBoardList()">목록</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -24,12 +26,26 @@
 import { onMounted, ref, inject } from "vue";
 import { useRouter } from 'vue-router';
 import { goPage } from '@/util/utils.js' // * as util
+import CommonButton from '@/components/CommonButton.vue';
 
 const $api = inject('$axios');
 const serverUrl = inject('$serverUrl');
 const router = useRouter();
 const routerquery = router.currentRoute.value.query;
-
+const btnInfo = ref({
+  blue : {
+    showYn : true,
+    btnNm : '저장'
+  },
+  red : {
+    showYn : false,
+    btnNm : '삭제'
+  },
+  gray : {
+    showYn : true,
+    btnNm : '목록'
+  }
+})
 const boardList = ref([]); // 리스트 데이터
 const boardIdx = ref(routerquery.idx);
 const resBoardObj = ref({

@@ -1,6 +1,9 @@
 <template>
   <div class="board-list">
-    <CommonButton :btnInfo="btnInfo" @blue="goWrite()" />
+    <div class="input-group">
+      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+      <button type="button" class="btn btn-outline-primary">search</button>
+  </div>
     <table v-if="boardList.length != 0" class="w3-table-all">
       <thead>
         <tr>
@@ -22,6 +25,7 @@
     <div v-else>
       <h1>No data</h1>
     </div>
+    <CommonButton :btnInfo="btnInfo" @blue="goWrite()" />
     <!-- <div v-if="paging.total_list_cnt > 0" class="pagination w3-bar w3-padding-16 w3-small" >
       <span class="pg">
       <a href="javascript:;" @click="goPage(1)" class="first w3-button w3-border">&lt;&lt;</a>

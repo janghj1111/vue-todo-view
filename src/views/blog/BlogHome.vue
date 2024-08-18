@@ -74,19 +74,34 @@
     </div><br/> 
 
     <div>
-    <h1>7. watch </h1>
-    <input v-model="userPW" placeholder="새 비밀번호를 입력하세요.">
-    <p>Current Password: {{ userPW }}</p>
-    <p>Previous Password: {{ previousPW }}</p>
+        <h1>7. watch </h1>
+        <input v-model="userPW" placeholder="새 비밀번호를 입력하세요.">
+        <p>Current Password: {{ userPW }}</p>
+        <p>Previous Password: {{ previousPW }}</p>
     </div><br/> 
+
+    <div>
+        <h1>8. axios </h1>
+        <select v-model="selectVal">
+            <option value="first" disabled="disabled">선택해 주세요.</option>
+            <option v-for="(topic,idx) in topics" :key=idx :value="topic.value">
+            {{ topic.name }}
+            </option>
+        </select>
+        <div v-for="item in resList" :key=item.id>{{ item.full_name }}</div>
+    </div><br/> 
+
+    <button @click="goVuex()">Vuex 가기</button><br/><br/>
 
    <div @click="scrollTop()">
     <p style="red">페이지 상단으로 이동하기</p>
   </div>
 </template>
-<script setup>
-import { onMounted, onUnmounted, ref,computed, watch } from "vue";
 
+<script setup>
+import { inject, onMounted, onUnmounted, ref,computed, watch } from "vue";
+import { goPage } from "@/util/utils.js";
+const $api = inject('$axios');
 // 입력폼
 const message = ref("ㅎ2ㅎ2");
 // 체크박스
@@ -126,7 +141,13 @@ const limitList = computed(() => {
 // watch
 const userPW = ref('');
 const previousPW = ref('');
-
+// axios
+const resList = ref([]);
+const selectVal = ref("first");
+const topics = ref([
+    { value: 'vue', name: 'Vue.js' },
+    { value: 'jQuery', name: 'jQuery' }
+])
 
 // 파일 선택 change 이벤트
 const handleChange = () => {
@@ -151,9 +172,20 @@ const handleScroll = () => {
 // watch 예제. userPW 감시
 watch(userPW , (newVal, oldVal) => {
    previousPW.value = oldVal;
-   console.log(`${oldVal}에서 ${newVal}로 바뀜`) 
+   console.log(`${oldVal}에서 ${newVal}로 바뀜`); 
 })
-
+// axios 예제 // val은 new
+watch(selectVal, async (val) => {
+    console.log(val);
+    let apiUrl = 'https://api.github.com/search/repositories';
+    await $api.get(apiUrl, {
+        params: {
+            q:`topic:${val}`
+        }
+    }).then((res)=>{
+        resList.value = res.data.items;
+    })
+})
 
 
 // 페이지 상단이동
@@ -163,6 +195,12 @@ const scrollTop = () => {
         top: 0,
         behavior: 'smooth'
     })
+}
+
+const goVuex = () => {
+  const path = './blog/vuex';
+  const params = {};
+  goPage(path, params);
 }
 
 onMounted(()=>{

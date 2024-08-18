@@ -4,11 +4,11 @@ const blogRouter = [
     name: "Blog",
     component: () => import("@/views/blog/BlogHome.vue"),
   },
-  //   {
-  //     path: "/board/detail",
-  //     name: "BoardDetail",
-  //     component: () => import("@/views/board/BoardDetail.vue"),
-  //   },
+  {
+    path: "/blog/Vuex",
+    name: "BlogVuex",
+    component: () => import("@/views/blog/BlogVuex.vue"),
+  },
   //   {
   //     path: "/board/write",
   //     name: "BoardWrite",

@@ -1,7 +1,7 @@
-import { createStore } from "vuex";
 
 // 스토어 만들기
-const store = createStore({
+//const store = createStore({
+export const blogModule = {
   state: {
     // 호출방법 : store.state.count
     count: 0,
@@ -67,5 +67,4 @@ const store = createStore({
       await commit("setMsg", param);
     },
   },
-});
-export default store;
+};

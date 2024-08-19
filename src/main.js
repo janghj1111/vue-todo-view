@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import router from "@/router"; // vue router 설정
 import axios from "axios";
-import store from "@/store/store.js";
+import store from "@/store"; // store 디렉터리 하위 index.js의 export를 사용
 
 /* store.js 예제 */
 console.log(store.state.count); // -> 0
